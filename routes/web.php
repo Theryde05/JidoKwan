@@ -3,5 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('Home');
+    return view('inicio');
+});
+
+Route::get('/login', function () {
+    return view('InicioSesion');
 });
