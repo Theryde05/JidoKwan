@@ -9,19 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('clases', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('clases', function (Blueprint $table) {
+        $table->id();
+        $table->string('nombre_clase', 50);
+        $table->foreignId('grupo_id')->constrained('grupos')->onDelete('cascade');
+        $table->foreignId('instructor_id')->nullable()->constrained('instructores')->onDelete('set null');
+        $table->string('ubicacion', 50)->nullable();
+        $table->timestamps();
+    });
+}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('clases');
-    }
+public function down()
+{
+    Schema::dropIfExists('clases');
+}
+
 };
