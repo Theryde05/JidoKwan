@@ -9,19 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('estudiantes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('estudiantes', function (Blueprint $table) {
+        $table->id();
+        $table->string('nombre', 50);
+        $table->string('apellido', 50);
+        $table->date('fecha_nacimiento')->nullable();
+        $table->foreignId('grupo_id')->nullable()->constrained('grupos')->onDelete('set null');
+        $table->timestamps();
+    });
+}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('estudiantes');
-    }
+public function down()
+{
+    Schema::dropIfExists('estudiantes');
+}
+
 };

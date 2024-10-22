@@ -9,19 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('grupo_estudiante', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('grupo_estudiante', function (Blueprint $table) {
+        $table->foreignId('estudiante_id')->constrained('estudiantes')->onDelete('cascade');
+        $table->foreignId('grupo_id')->constrained('grupos')->onDelete('cascade');
+        $table->string('estado', 30);
+        $table->primary(['estudiante_id', 'grupo_id']);
+    });
+}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('grupo_estudiante');
-    }
+public function down()
+{
+    Schema::dropIfExists('grupo_estudiante');
+}
+
 };
